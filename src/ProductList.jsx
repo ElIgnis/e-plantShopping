@@ -260,7 +260,6 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (itemToAdd) => {
-        console.log(itemToAdd);
         const item = addedToCart[itemToAdd];
         dispatch(addItem(itemToAdd));
         setAddedToCart({...addedToCart, [itemToAdd.name]: true});
@@ -302,7 +301,13 @@ function ProductList({ onHomeClick }) {
                                     />
                                     <p>{plantItem.description}</p>
                                     <p className="product-price">${plantItem.cost}</p>
-                                    <button className="product-button" onClick={()=> handleAddToCart(plantItem)}>Add to Cart</button>
+                                    <button 
+                                    className={`product-button ${addedToCart[plantItem.name] ? "added-to-cart" : ""}`} 
+                                    onClick={()=> handleAddToCart(plantItem)}
+                                    disabled={addedToCart[plantItem.name]}
+                                    >
+                                        {addedToCart[plantItem.name] ? "Added to Cart" : "Add to Cart"}
+                                    </button>
                                 </div>
                             ))}
                             </div>
