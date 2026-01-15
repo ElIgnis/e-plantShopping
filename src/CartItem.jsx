@@ -13,7 +13,7 @@ const CartItem = ({ onContinueShopping }) => {
 
     cart.forEach((item)=>{
       const parsedCost = item.cost.replace(/\$/g, '');
-      totalAmount += Number(parsedCost);
+      totalAmount += Number(parsedCost) * item.quantity;
     })
 
     return totalAmount;
@@ -22,8 +22,6 @@ const CartItem = ({ onContinueShopping }) => {
   const handleContinueShopping = (e) => {
    onContinueShopping(e);
   };
-
-
 
   const handleIncrement = (item) => {
     dispatch(updateQuantity({name: item.name, quantity:item.quantity+1}));
